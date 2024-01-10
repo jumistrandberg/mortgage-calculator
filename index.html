@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mortgage Calculator</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
+      <div class="input-container">
         <label for="loan">Loan amount:</label>
-        <input id="loan" type="number">
+        <input id="loan" type="number" />
 
         <label for="interest">Interest rate:</label>
-        <input id="interest" type="number">
+        <input id="interest" type="number" />
         <span>%</span>
 
         <label for="time">Loan period:</label>
-        <input id="time" type="number">
+        <input id="time" type="number" />
+
+        <button id="submit-btn">Calculate</button>
+      </div>
+
+      <div id="output-container"></div>
     </main>
-</body>
+  </body>
 </html>
