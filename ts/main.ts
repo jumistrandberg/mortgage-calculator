@@ -7,9 +7,9 @@ const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
 
 // Annuity interface 
 interface Annuity {
-    principal: number,
-    annualInterest: number, 
-    numberOfPayments: number
+    principal: number;
+    annualInterest: number;
+    numberOfPayments: number;
 }
 
 // Get input values for the calculation 
@@ -57,3 +57,15 @@ submitBtn.addEventListener('click', (e) => {
     console.log('monthly payment:', Math.round(annuityFormula(values)));
 
 })
+
+
+// Interface for the values we want to calculate and display 
+interface loanValues {
+    amountLeft: number;
+    interestPaid: number; 
+    monthlyPayment: number; 
+}
+
+function calculateLoanValues(value: Annuity) { 
+    
+}
