@@ -1,10 +1,12 @@
 // Get HTML elements
-const principalInput = document.getElementById("loan") as HTMLInputElement;
-const interestInput = document.getElementById("interest") as HTMLInputElement;
-const timeInput = document.getElementById("time") as HTMLInputElement;
-const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
- // Get output container
- let outputContainer = document.getElementById("output-container") as HTMLDivElement;
+const principalInput = document.getElementById('loan') as HTMLInputElement;
+const interestInput = document.getElementById('interest') as HTMLInputElement;
+const timeInput = document.getElementById('time') as HTMLInputElement;
+const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+// Get output container
+let outputContainer = document.getElementById(
+  'output-container'
+) as HTMLDivElement;
 
 // Annuity interface
 interface Annuity {
@@ -13,39 +15,48 @@ interface Annuity {
   numberOfPayments: number;
 }
 
+function clearErrorMessage() {
+  const errorMessage = outputContainer.querySelector('p');
+  if (errorMessage) {
+    outputContainer.removeChild(errorMessage);
+  }
+}
+// Indicate to stop and give error if values are out of bound
+let unrealisticNumber = false;
+
 // Get input values for the calculation
 function getValues(): Annuity {
+  clearErrorMessage();
+
+  // Store values from input
   const principal = parseFloat(principalInput.value);
   const annualInterest = parseFloat(interestInput.value);
   const timeYears = parseFloat(timeInput.value);
   const numberOfPayments = timeYears * 12;
 
-  // Guard for unrealistic inputs 
+  // Guard for unrealistic inputs
   if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
-    const errorMessage = document.createElement('p'); 
-    errorMessage.textContent = 'Please enter realistic values'
-    outputContainer.appendChild(errorMessage); 
-    throw new Error('invalid inputs')
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Please enter realistic values';
+    outputContainer.appendChild(errorMessage);
+    unrealisticNumber = true;
+    throw new Error('invalid inputs');
   } else {
-    const errorMessage = outputContainer.querySelector('p');
-    if(errorMessage) {
-        outputContainer.removeChild(errorMessage)
-    }
+    unrealisticNumber = false;
+    return { principal, annualInterest, numberOfPayments };
   }
-  return { principal, annualInterest, numberOfPayments };
-
 }
 
 // Listen for the input the get the values
-principalInput.addEventListener("input", (e) => {
+principalInput.addEventListener('input', (e) => {
   const values = getValues();
 });
 
-interestInput.addEventListener("input", (e) => {
+interestInput.addEventListener('input', (e) => {
   const values = getValues();
 });
 
-timeInput.addEventListener("input", (e) => {
+timeInput.addEventListener('input', (e) => {
   const values = getValues();
 });
 
@@ -110,43 +121,45 @@ function calculateLoanValues(value: Annuity) {
 
 // Display array of values on site
 function displayValues(values: loanValues[]) {
-   
-    // Clear old every time 
-    outputContainer.innerHTML = ''; 
+  // Clear old every time
+  outputContainer.innerHTML = '';
 
-    // Index the months to know which it is
-    values.forEach((value, index) => {
-        // Make a row for the values 
-        const outputRow = document.createElement('div'); 
-        outputRow.classList.add('output-row'); 
+  // Index the months to know which it is
+  values.forEach((value, index) => {
+    // Make a row for the values
+    const outputRow = document.createElement('div');
+    outputRow.classList.add('output-row');
 
-        // Show which month on each row
-        const monthDiv = document.createElement('div'); 
-        monthDiv.textContent = `Month ${index + 1}`; 
-        outputRow.appendChild(monthDiv); 
+    // Show which month on each row
+    const monthDiv = document.createElement('div');
+    monthDiv.textContent = `Month ${index + 1}`;
+    outputRow.appendChild(monthDiv);
 
-        // Create divs for the values and put them in the row 
-        const monthlyPaymentDiv = document.createElement('div'); 
-        monthlyPaymentDiv.textContent = `Monthly Payment: ${value.monthlyPayment.toFixed(0)}`; 
-        outputRow.appendChild(monthlyPaymentDiv);
+    // Create divs for the values and put them in the row
+    const monthlyPaymentDiv = document.createElement('div');
+    monthlyPaymentDiv.textContent = `Monthly Payment: ${value.monthlyPayment.toFixed(
+      0
+    )}`;
+    outputRow.appendChild(monthlyPaymentDiv);
 
-        const interestPaidDiv = document.createElement('div'); 
-        interestPaidDiv.textContent = `Interest Paid: ${value.interestPaid.toFixed(0)}`; 
-        outputRow.appendChild(interestPaidDiv); 
+    const interestPaidDiv = document.createElement('div');
+    interestPaidDiv.textContent = `Interest Paid: ${value.interestPaid.toFixed(
+      0
+    )}`;
+    outputRow.appendChild(interestPaidDiv);
 
-        const amountLeftDiv = document.createElement('div'); 
-        amountLeftDiv.textContent = `Amount Left: ${value.amountLeft.toFixed(0)}`; 
-        outputRow.appendChild(amountLeftDiv); 
+    const amountLeftDiv = document.createElement('div');
+    amountLeftDiv.textContent = `Amount Left: ${value.amountLeft.toFixed(0)}`;
+    outputRow.appendChild(amountLeftDiv);
 
+    // Append rows to the container
+    outputContainer.appendChild(outputRow);
+  });
+}
 
-        // Append rows to the container 
-        outputContainer.appendChild(outputRow);
-    });
-  }
-
-    // Show on click 
-    submitBtn.addEventListener('click', (e) => {
-        const values = getValues(); 
-        const loanValues = calculateLoanValues(values); 
-        displayValues(loanValues); 
-      });
+// Show on click
+submitBtn.addEventListener('click', (e) => {
+  const values = getValues();
+  const loanValues = calculateLoanValues(values);
+  displayValues(loanValues);
+});

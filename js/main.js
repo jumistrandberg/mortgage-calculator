@@ -6,8 +6,15 @@ const timeInput = document.getElementById("time");
 const submitBtn = document.getElementById("submit-btn");
 // Get output container
 let outputContainer = document.getElementById("output-container");
+// Indicate to stop and give error if values are out of bound 
+let unrealisticNumber = false;
 // Get input values for the calculation
 function getValues() {
+    // Clear if error message is displayed 
+    const errorMessage = outputContainer.querySelector('p');
+    if (errorMessage) { }
+    outputContainer.removeChild(errorMessage);
+    // Store values from input 
     const principal = parseFloat(principalInput.value);
     const annualInterest = parseFloat(interestInput.value);
     const timeYears = parseFloat(timeInput.value);
@@ -17,15 +24,13 @@ function getValues() {
         const errorMessage = document.createElement('p');
         errorMessage.textContent = 'Please enter realistic values';
         outputContainer.appendChild(errorMessage);
+        unrealisticNumber = true;
         throw new Error('invalid inputs');
     }
     else {
-        const errorMessage = outputContainer.querySelector('p');
-        if (errorMessage) {
-            outputContainer.removeChild(errorMessage);
-        }
+        unrealisticNumber = false;
+        return { principal, annualInterest, numberOfPayments };
     }
-    return { principal, annualInterest, numberOfPayments };
 }
 // Listen for the input the get the values
 principalInput.addEventListener("input", (e) => {
