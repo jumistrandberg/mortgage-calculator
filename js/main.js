@@ -1,29 +1,38 @@
 "use strict";
 // Get HTML elements
-const principal = document.getElementById('loan');
-const interest = document.getElementById('interest');
-const time = document.getElementById('time');
+const principalInput = document.getElementById('loan');
+const interestInput = document.getElementById('interest');
+const timeInput = document.getElementById('time');
 const submitBtn = document.getElementById('submit-btn');
-// Annuity fomula 
-function annunityFormula(principal, annualInterest, numberOfPayments) {
+// Get input values for the calculation 
+function getValues() {
+    const principal = parseFloat(principalInput.value);
+    const annualInterest = parseFloat(interestInput.value);
+    const numberOfPayments = parseFloat(timeInput.value);
+    return { principal, annualInterest, numberOfPayments };
+}
+// Listen for the input the get the values  
+principalInput.addEventListener('input', (e) => {
+    const values = getValues();
+});
+interestInput.addEventListener('input', (e) => {
+    const values = getValues();
+});
+timeInput.addEventListener('input', (e) => {
+    const values = getValues();
+});
+// Annuity formula 
+function annuityFormula(values) {
     // Divided by months in a year and 100 to make it decimal 
-    const monthlyInterest = annualInterest / 12 / 100;
+    const monthlyInterest = values.annualInterest / 12 / 100;
     // Part of the given formula that calculate present value of future payments 
-    const discountFactor = ((1 + monthlyInterest) ** numberOfPayments - 1) /
-        (monthlyInterest * (1 + monthlyInterest) ** numberOfPayments);
-    const monthlyPayment = principal / discountFactor;
+    const discountFactor = ((1 + monthlyInterest) ** values.numberOfPayments - 1) /
+        (monthlyInterest * (1 + monthlyInterest) ** values.numberOfPayments);
+    const monthlyPayment = values.principal / discountFactor;
     return monthlyPayment;
 }
-// Get value of loan amount (principal) 
-principal.addEventListener('input', (e) => {
-    const principalValue = parseFloat(principal.value);
-    console.log(principalValue);
-});
-// Get value of interest rate (in percentage)
-interest.addEventListener('input', (e) => {
-    const interestValue = parseFloat(interest.value);
-});
-// Get value of loan period (in years)
-time.addEventListener('input', (e) => {
-    const timeValue = parseFloat(time.value);
+// Listen for click on calculate button
+submitBtn.addEventListener('click', (e) => {
+    const values = getValues();
+    console.log('monthly payment:', annuityFormula(values));
 });

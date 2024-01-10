@@ -11,6 +11,29 @@ interface Annuity {
     numberOfPayments: number
 }
 
+// Get input values for the calculation 
+function getValues(): Annuity {
+    const principal = parseFloat(principalInput.value); 
+    const annualInterest = parseFloat(interestInput.value); 
+    const numberOfPayments = parseFloat(timeInput.value);
+
+    return { principal, annualInterest, numberOfPayments}; 
+}
+
+
+// Listen for the input the get the values  
+principalInput.addEventListener('input', (e) => {
+    const values = getValues()
+})
+
+interestInput.addEventListener('input', (e) => {
+    const values = getValues()
+})
+
+timeInput.addEventListener('input', (e) => {
+    const values = getValues()
+})
+
 // Annuity formula 
 function annuityFormula(values:Annuity): number {
     // Divided by months in a year and 100 to make it decimal 
@@ -23,3 +46,9 @@ function annuityFormula(values:Annuity): number {
     return monthlyPayment; 
 }
 
+// Listen for click on calculate button
+submitBtn.addEventListener('click', (e) => {
+    const values = getValues(); 
+    console.log('monthly payment:', annuityFormula(values));
+
+})
