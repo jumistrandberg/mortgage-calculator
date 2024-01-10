@@ -4,6 +4,7 @@ const interestInput = document.getElementById('interest') as HTMLInputElement;
 const timeInput = document.getElementById('time') as HTMLInputElement;
 const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
 
+
 // Annuity interface 
 interface Annuity {
     principal: number,
@@ -15,10 +16,13 @@ interface Annuity {
 function getValues(): Annuity {
     const principal = parseFloat(principalInput.value); 
     const annualInterest = parseFloat(interestInput.value); 
-    const numberOfPayments = parseFloat(timeInput.value);
+    const timeYears = parseFloat(timeInput.value);
+    const numberOfPayments = timeYears * 12; 
 
     return { principal, annualInterest, numberOfPayments}; 
 }
+
+
 
 
 // Listen for the input the get the values  
@@ -36,6 +40,7 @@ timeInput.addEventListener('input', (e) => {
 
 // Annuity formula 
 function annuityFormula(values:Annuity): number {
+
     // Divided by months in a year and 100 to make it decimal 
     const monthlyInterest = values.annualInterest / 12 / 100; 
     // Part of the given formula that calculate present value of future payments 
@@ -49,6 +54,6 @@ function annuityFormula(values:Annuity): number {
 // Listen for click on calculate button
 submitBtn.addEventListener('click', (e) => {
     const values = getValues(); 
-    console.log('monthly payment:', annuityFormula(values));
+    console.log('monthly payment:', Math.round(annuityFormula(values)));
 
 })

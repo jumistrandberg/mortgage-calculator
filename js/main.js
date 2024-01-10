@@ -8,7 +8,8 @@ const submitBtn = document.getElementById('submit-btn');
 function getValues() {
     const principal = parseFloat(principalInput.value);
     const annualInterest = parseFloat(interestInput.value);
-    const numberOfPayments = parseFloat(timeInput.value);
+    const timeYears = parseFloat(timeInput.value);
+    const numberOfPayments = timeYears * 12;
     return { principal, annualInterest, numberOfPayments };
 }
 // Listen for the input the get the values  
@@ -34,5 +35,5 @@ function annuityFormula(values) {
 // Listen for click on calculate button
 submitBtn.addEventListener('click', (e) => {
     const values = getValues();
-    console.log('monthly payment:', annuityFormula(values));
+    console.log('monthly payment:', Math.round(annuityFormula(values)));
 });
