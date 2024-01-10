@@ -10,3 +10,7 @@ function annunityFormula(principal: number, annualInterest:number, numberOfPayme
     const monthlyPayment = principal / discountFactor; 
     return monthlyPayment; 
 }
+
+// Get value of loan amount (principal) 
+// Get value of interest rate (in percentage)
+// Get value of loan period (in years)
