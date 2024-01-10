@@ -117,7 +117,7 @@ function displayValues(values: loanValues[]) {
         outputRow.appendChild(monthlyPaymentDiv);
 
         const interestPaidDiv = document.createElement('div'); 
-        interestPaidDiv.textContent = `Interest Paid ${value.interestPaid.toFixed(0)}`; 
+        interestPaidDiv.textContent = `Interest Paid: ${value.interestPaid.toFixed(0)}`; 
         outputRow.appendChild(interestPaidDiv); 
 
         const amountLeftDiv = document.createElement('div'); 

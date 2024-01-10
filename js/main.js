@@ -82,7 +82,7 @@ function displayValues(values) {
         monthlyPaymentDiv.textContent = `Monthly Payment: ${value.monthlyPayment.toFixed(0)}`;
         outputRow.appendChild(monthlyPaymentDiv);
         const interestPaidDiv = document.createElement('div');
-        interestPaidDiv.textContent = `Interest Paid ${value.interestPaid.toFixed(0)}`;
+        interestPaidDiv.textContent = `Interest Paid: ${value.interestPaid.toFixed(0)}`;
         outputRow.appendChild(interestPaidDiv);
         const amountLeftDiv = document.createElement('div');
         amountLeftDiv.textContent = `Amount Left: ${value.amountLeft.toFixed(0)}`;
