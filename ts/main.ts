@@ -3,6 +3,8 @@ const principalInput = document.getElementById("loan") as HTMLInputElement;
 const interestInput = document.getElementById("interest") as HTMLInputElement;
 const timeInput = document.getElementById("time") as HTMLInputElement;
 const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+ // Get output container
+ let outputContainer = document.getElementById("output-container") as HTMLDivElement;
 
 // Annuity interface
 interface Annuity {
@@ -18,7 +20,20 @@ function getValues(): Annuity {
   const timeYears = parseFloat(timeInput.value);
   const numberOfPayments = timeYears * 12;
 
+  // Guard for unrealistic inputs 
+  if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
+    const errorMessage = document.createElement('p'); 
+    errorMessage.textContent = 'Please enter realistic values'
+    outputContainer.appendChild(errorMessage); 
+    throw new Error('invalid inputs')
+  } else {
+    const errorMessage = outputContainer.querySelector('p');
+    if(errorMessage) {
+        outputContainer.removeChild(errorMessage)
+    }
+  }
   return { principal, annualInterest, numberOfPayments };
+
 }
 
 // Listen for the input the get the values
@@ -95,8 +110,7 @@ function calculateLoanValues(value: Annuity) {
 
 // Display array of values on site
 function displayValues(values: loanValues[]) {
-    // Get output container
-    const outputContainer = document.getElementById("output-container") as HTMLDivElement;
+   
     // Clear old every time 
     outputContainer.innerHTML = ''; 
 
