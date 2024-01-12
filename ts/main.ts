@@ -11,6 +11,12 @@ interface LoanValues {
   monthlyPayment: number;
 }
 
+interface InputValues {
+  principal: string;
+  interest: string;
+  time: string;
+}
+
 // Loan Calculator class
 class LoanCalculator {
   // Properties for HTML input and output elements
@@ -66,7 +72,6 @@ class LoanCalculator {
 
     // Guard for unrealistic inputs
     if (annualInterest > 30 || timeYears > 100) {
-      const errorMessage = document.createElement("p");
       this.outputContainer.innerText = "Sluta dröm! Välj något rimligt!";
 
       // Clear input boxes
@@ -120,7 +125,7 @@ class LoanCalculator {
   }
 
   // Display result values from loan values in HTML output container
-  private displayValues(values: LoanValues[]) {
+  private displayValues(values: LoanValues[], inputValues: InputValues) {
     this.outputContainer.innerHTML = "";
 
     let totalInterest = 0;
@@ -158,6 +163,20 @@ class LoanCalculator {
     });
 
     // Display the overview values separately
+    // Show the input values in overview
+    const principalInputDiv = document.createElement("div");
+    principalInputDiv.textContent = `Lånebelopp: ${inputValues.principal} SEK`;
+    this.outputContainer.appendChild(principalInputDiv);
+
+    const interestInputDiv = document.createElement("div");
+    interestInputDiv.textContent = `Årsränta: ${inputValues.interest}%`;
+    this.outputContainer.appendChild(interestInputDiv);
+
+    const timeInputDiv = document.createElement("div");
+    timeInputDiv.textContent = `Avbetalningstid: ${inputValues.time} år`;
+    this.outputContainer.appendChild(timeInputDiv);
+
+    // Monthly payment
     const overviewMonthlyPaymentDiv = document.createElement("div");
     overviewMonthlyPaymentDiv.classList.add("total-row");
     overviewMonthlyPaymentDiv.textContent =
@@ -166,6 +185,7 @@ class LoanCalculator {
       ].monthlyPayment.toFixed(0)}`;
     this.outputContainer.appendChild(overviewMonthlyPaymentDiv);
 
+    // Total interest
     const totalInterestDiv = document.createElement("div");
     totalInterestDiv.classList.add("total-row");
     totalInterestDiv.textContent = `Total ränta: ${totalInterest.toFixed(0)}`;
@@ -190,6 +210,12 @@ class LoanCalculator {
 
   // Get values when submit button is clicked
   private handleSubmit() {
+    const inputValues: InputValues = {
+      principal: this.principalInput.value,
+      interest: this.interestInput.value,
+      time: this.timeInput.value,
+    };
+
     const values = this.getValues();
     const loanValues = this.calculateLoanValues(values);
 
@@ -199,7 +225,7 @@ class LoanCalculator {
     this.interestInput.value = "";
     this.timeInput.value = "";
 
-    this.displayValues(loanValues);
+    this.displayValues(loanValues, inputValues);
   }
 
   private toggleHideShow() {
