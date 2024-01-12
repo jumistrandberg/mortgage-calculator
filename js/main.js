@@ -95,17 +95,17 @@ function displayValues(values) {
         outputRow.classList.add('output-row');
         // Show which month on each row
         const monthDiv = document.createElement('div');
-        monthDiv.textContent = `Month ${index + 1}`;
+        monthDiv.textContent = `Månad ${index + 1}`;
         outputRow.appendChild(monthDiv);
         // Create divs for the values and put them in the row
         const monthlyPaymentDiv = document.createElement('div');
-        monthlyPaymentDiv.textContent = `Monthly Payment: ${value.monthlyPayment.toFixed(0)}`;
+        monthlyPaymentDiv.textContent = `Månadskostnad: ${value.monthlyPayment.toFixed(0)}`;
         outputRow.appendChild(monthlyPaymentDiv);
         const interestPaidDiv = document.createElement('div');
-        interestPaidDiv.textContent = `Interest Paid: ${value.interestPaid.toFixed(0)}`;
+        interestPaidDiv.textContent = `Varav ränta: ${value.interestPaid.toFixed(0)}`;
         outputRow.appendChild(interestPaidDiv);
         const amountLeftDiv = document.createElement('div');
-        amountLeftDiv.textContent = `Amount Left: ${value.amountLeft.toFixed(0)}`;
+        amountLeftDiv.textContent = `Återstående belopp: ${value.amountLeft.toFixed(0)}`;
         outputRow.appendChild(amountLeftDiv);
         // Append rows to the container
         outputContainer.appendChild(outputRow);
