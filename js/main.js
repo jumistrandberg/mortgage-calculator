@@ -12,14 +12,14 @@ class LoanCalculator {
     }
     // Listen for input and call handleInput method
     setupEventListeners() {
-        this.principalInput.addEventListener('input', this.handleInput.bind(this));
-        this.interestInput.addEventListener('input', this.handleInput.bind(this));
-        this.timeInput.addEventListener('input', this.handleInput.bind(this));
-        this.submitBtn.addEventListener('click', this.handleSubmit.bind(this));
+        this.principalInput.addEventListener("input", this.handleInput.bind(this));
+        this.interestInput.addEventListener("input", this.handleInput.bind(this));
+        this.timeInput.addEventListener("input", this.handleInput.bind(this));
+        this.submitBtn.addEventListener("click", this.handleSubmit.bind(this));
     }
     // Remove error message from output container
     clearErrorMessage() {
-        const errorMessage = this.outputContainer.querySelector('p');
+        const errorMessage = this.outputContainer.querySelector("p");
         if (errorMessage) {
             this.outputContainer.removeChild(errorMessage);
         }
@@ -37,13 +37,13 @@ class LoanCalculator {
         const numberOfPayments = timeYears * 12;
         // Guard for unrealistic inputs
         if (annualInterest > 30 || timeYears > 100) {
-            const errorMessage = document.createElement('p');
-            this.outputContainer.innerText = 'Sluta dröm! Välj något rimligt!';
-            // Clear input boxes 
-            this.principalInput.value = '';
-            this.interestInput.value = '';
-            this.timeInput.value = '';
-            throw new Error('Invalid inputs');
+            const errorMessage = document.createElement("p");
+            this.outputContainer.innerText = "Sluta dröm! Välj något rimligt!";
+            // Clear input boxes
+            this.principalInput.value = "";
+            this.interestInput.value = "";
+            this.timeInput.value = "";
+            throw new Error("Invalid inputs");
         }
         else {
             return { principal, annualInterest, numberOfPayments };
@@ -82,38 +82,46 @@ class LoanCalculator {
     }
     // Display result values from loan values in HTML output container
     displayValues(values) {
-        this.outputContainer.innerHTML = '';
+        this.outputContainer.innerHTML = "";
         values.forEach((value, index) => {
-            const outputRow = document.createElement('div');
-            outputRow.classList.add('output-row');
-            const monthDiv = document.createElement('div');
+            const outputRow = document.createElement("div");
+            outputRow.classList.add("output-row", "hidden");
+            const monthDiv = document.createElement("div");
             monthDiv.textContent = `Månad ${index + 1}`;
             outputRow.appendChild(monthDiv);
-            const monthlyPaymentDiv = document.createElement('div');
+            const monthlyPaymentDiv = document.createElement("div");
             monthlyPaymentDiv.textContent = `Månadskostnad: ${value.monthlyPayment.toFixed(0)}`;
             outputRow.appendChild(monthlyPaymentDiv);
-            const interestPaidDiv = document.createElement('div');
+            const interestPaidDiv = document.createElement("div");
             interestPaidDiv.textContent = `Varav ränta: ${value.interestPaid.toFixed(0)}`;
             outputRow.appendChild(interestPaidDiv);
-            const amountLeftDiv = document.createElement('div');
+            const amountLeftDiv = document.createElement("div");
             amountLeftDiv.textContent = `Återstående belopp: ${value.amountLeft.toFixed(0)}`;
             outputRow.appendChild(amountLeftDiv);
             this.outputContainer.appendChild(outputRow);
         });
     }
-    // Get values when submit button is clicked 
+    // Get values when submit button is clicked
     handleSubmit() {
         const values = this.getValues();
         const loanValues = this.calculateLoanValues(values);
         this.displayValues(loanValues);
-        // Create button to show monthly values 
-        const hideShowBtn = document.createElement('button');
-        hideShowBtn.classList.add('hide-show-btn');
-        hideShowBtn.innerText = 'Visa månadsuppställning';
-        this.outputContainer.appendChild(hideShowBtn);
-        // Listen for clicks to show or hide monthly calculations 
-        hideShowBtn.addEventListener('click', () => {
-            console.log('show');
+        // Create button to show monthly values
+        const hideShowBtn = document.createElement("button");
+        hideShowBtn.classList.add("hide-show-btn");
+        hideShowBtn.innerText = "Visa månadsuppställning";
+        // Insert the hideShowBtn before the first child of outputContainer
+        this.outputContainer.insertBefore(hideShowBtn, this.outputContainer.firstChild);
+        // Listen for clicks to show or hide monthly calculations
+        hideShowBtn.addEventListener("click", () => {
+            this.toggleHideShow();
+        });
+    }
+    toggleHideShow() {
+        const outputRows = document.querySelectorAll(".output-row");
+        // Interate through all rows
+        outputRows.forEach((row) => {
+            row.classList.toggle("hidden");
         });
     }
 }
