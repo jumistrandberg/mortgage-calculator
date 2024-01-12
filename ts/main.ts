@@ -123,6 +123,8 @@ class LoanCalculator {
   private displayValues(values: LoanValues[]) {
     this.outputContainer.innerHTML = "";
 
+    let totalInterest = 0;
+
     values.forEach((value, index) => {
       const outputRow = document.createElement("div");
       outputRow.classList.add("output-row", "hidden");
@@ -150,14 +152,23 @@ class LoanCalculator {
       outputRow.appendChild(amountLeftDiv);
 
       this.outputContainer.appendChild(outputRow);
-    });
-  }
 
-  // Get values when submit button is clicked
-  private handleSubmit() {
-    const values = this.getValues();
-    const loanValues = this.calculateLoanValues(values);
-    this.displayValues(loanValues);
+      // Add each interest to total interest
+      totalInterest += value.interestPaid;
+    });
+
+    // Display the overview values separately
+    const overviewMonthlyPaymentDiv = document.createElement("div");
+    overviewMonthlyPaymentDiv.classList.add("total-row");
+    overviewMonthlyPaymentDiv.textContent =   overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)}`;
+    this.outputContainer.appendChild(overviewMonthlyPaymentDiv);
+
+    const totalInterestDiv = document.createElement("div");
+    totalInterestDiv.classList.add("total-row");
+    totalInterestDiv.textContent = `Total ränta: ${totalInterest.toFixed(
+      0
+    )}`;
+    this.outputContainer.appendChild(totalInterestDiv);
 
     // Create button to show monthly values
     const hideShowBtn = document.createElement("button");
@@ -174,6 +185,13 @@ class LoanCalculator {
     hideShowBtn.addEventListener("click", () => {
       this.toggleHideShow();
     });
+  }
+
+  // Get values when submit button is clicked
+  private handleSubmit() {
+    const values = this.getValues();
+    const loanValues = this.calculateLoanValues(values);
+    this.displayValues(loanValues);
   }
 
   private toggleHideShow() {

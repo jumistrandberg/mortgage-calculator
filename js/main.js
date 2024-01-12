@@ -83,6 +83,7 @@ class LoanCalculator {
     // Display result values from loan values in HTML output container
     displayValues(values) {
         this.outputContainer.innerHTML = "";
+        let totalInterest = 0;
         values.forEach((value, index) => {
             const outputRow = document.createElement("div");
             outputRow.classList.add("output-row", "hidden");
@@ -99,13 +100,18 @@ class LoanCalculator {
             amountLeftDiv.textContent = `Återstående belopp: ${value.amountLeft.toFixed(0)}`;
             outputRow.appendChild(amountLeftDiv);
             this.outputContainer.appendChild(outputRow);
+            // Add each interest to total interest
+            totalInterest += value.interestPaid;
         });
-    }
-    // Get values when submit button is clicked
-    handleSubmit() {
-        const values = this.getValues();
-        const loanValues = this.calculateLoanValues(values);
-        this.displayValues(loanValues);
+        // Display the overview values separately
+        const overviewMonthlyPaymentDiv = document.createElement("div");
+        overviewMonthlyPaymentDiv.classList.add("total-row");
+        overviewMonthlyPaymentDiv.textContent = overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)}`;
+        this.outputContainer.appendChild(overviewMonthlyPaymentDiv);
+        const totalInterestDiv = document.createElement("div");
+        totalInterestDiv.classList.add("total-row");
+        totalInterestDiv.textContent = `Total ränta: ${totalInterest.toFixed(0)}`;
+        this.outputContainer.appendChild(totalInterestDiv);
         // Create button to show monthly values
         const hideShowBtn = document.createElement("button");
         hideShowBtn.classList.add("hide-show-btn");
@@ -116,6 +122,12 @@ class LoanCalculator {
         hideShowBtn.addEventListener("click", () => {
             this.toggleHideShow();
         });
+    }
+    // Get values when submit button is clicked
+    handleSubmit() {
+        const values = this.getValues();
+        const loanValues = this.calculateLoanValues(values);
+        this.displayValues(loanValues);
     }
     toggleHideShow() {
         const outputRows = document.querySelectorAll(".output-row");
