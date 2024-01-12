@@ -19,6 +19,7 @@ interface Annuity {
     private submitBtn: HTMLButtonElement;
     private outputContainer: HTMLDivElement;
   
+    // Get the elements
     constructor() {
       this.principalInput = document.getElementById("loan") as HTMLInputElement;
       this.interestInput = document.getElementById("interest") as HTMLInputElement;
@@ -29,6 +30,7 @@ interface Annuity {
       this.setupEventListeners();
     }
   
+    // Listen for input and call handleInput method
     private setupEventListeners() {
       this.principalInput.addEventListener('input', this.handleInput.bind(this));
       this.interestInput.addEventListener('input', this.handleInput.bind(this));
@@ -40,6 +42,7 @@ interface Annuity {
       const errorMessage = this.outputContainer.querySelector('p');
       if (errorMessage) {
         this.outputContainer.removeChild(errorMessage);
+
       }
     }
   
@@ -58,6 +61,12 @@ interface Annuity {
       if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
         const errorMessage = document.createElement('p');
         this.outputContainer.innerText = 'Please enter realistic values';
+
+         // Clear input boxes 
+         this.principalInput.value = ''; 
+         this.interestInput.value = ''; 
+         this.timeInput.value = ''; 
+         
         throw new Error('Invalid inputs');
       } else {
         return { principal, annualInterest, numberOfPayments };

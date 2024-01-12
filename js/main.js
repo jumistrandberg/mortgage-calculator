@@ -1,6 +1,7 @@
 "use strict";
 // Loan Calculator class
 class LoanCalculator {
+    // Get the elements
     constructor() {
         this.principalInput = document.getElementById("loan");
         this.interestInput = document.getElementById("interest");
@@ -9,6 +10,7 @@ class LoanCalculator {
         this.outputContainer = document.getElementById("output-container");
         this.setupEventListeners();
     }
+    // Listen for input and call handleInput method
     setupEventListeners() {
         this.principalInput.addEventListener('input', this.handleInput.bind(this));
         this.interestInput.addEventListener('input', this.handleInput.bind(this));
@@ -34,6 +36,10 @@ class LoanCalculator {
         if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
             const errorMessage = document.createElement('p');
             this.outputContainer.innerText = 'Please enter realistic values';
+            // Clear input boxes 
+            this.principalInput.value = '';
+            this.interestInput.value = '';
+            this.timeInput.value = '';
             throw new Error('Invalid inputs');
         }
         else {
