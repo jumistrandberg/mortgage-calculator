@@ -60,13 +60,13 @@ interface Annuity {
       // Guard for unrealistic inputs
       if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
         const errorMessage = document.createElement('p');
-        this.outputContainer.innerText = 'Please enter realistic values';
+        this.outputContainer.innerText = 'Sluta dröm, välj något rimligt!';
 
          // Clear input boxes 
          this.principalInput.value = ''; 
          this.interestInput.value = ''; 
          this.timeInput.value = ''; 
-         
+
         throw new Error('Invalid inputs');
       } else {
         return { principal, annualInterest, numberOfPayments };
