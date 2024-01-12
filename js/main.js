@@ -106,6 +106,11 @@ class LoanCalculator {
         const values = this.getValues();
         const loanValues = this.calculateLoanValues(values);
         this.displayValues(loanValues);
+        // Create button to show monthly values 
+        const hideShowBtn = document.createElement('button');
+        hideShowBtn.classList.add('hide-show-btn');
+        hideShowBtn.innerText = 'Visa månadsuppställning';
+        this.outputContainer.appendChild(hideShowBtn);
     }
 }
 // Create an instance of LoanCalculator
