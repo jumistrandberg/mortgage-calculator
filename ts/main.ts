@@ -156,9 +156,18 @@ interface Annuity {
       hideShowBtn.innerText = 'Visa månadsuppställning';
 
       this.outputContainer.appendChild(hideShowBtn);
+
+      // Listen for clicks to show or hide monthly calculations 
+      hideShowBtn.addEventListener('click', () => {
+        console.log('show')
+      })
+      
     }
   }
   
   // Create an instance of LoanCalculator
   const loanCalculator = new LoanCalculator();
+
+
+
   

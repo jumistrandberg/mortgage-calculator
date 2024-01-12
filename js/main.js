@@ -111,6 +111,10 @@ class LoanCalculator {
         hideShowBtn.classList.add('hide-show-btn');
         hideShowBtn.innerText = 'Visa månadsuppställning';
         this.outputContainer.appendChild(hideShowBtn);
+        // Listen for clicks to show or hide monthly calculations 
+        hideShowBtn.addEventListener('click', () => {
+            console.log('show');
+        });
     }
 }
 // Create an instance of LoanCalculator
