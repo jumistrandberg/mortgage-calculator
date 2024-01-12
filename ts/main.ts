@@ -4,9 +4,7 @@ const interestInput = document.getElementById('interest') as HTMLInputElement;
 const timeInput = document.getElementById('time') as HTMLInputElement;
 const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
 // Get output container
-let outputContainer = document.getElementById(
-  'output-container'
-) as HTMLDivElement;
+let outputContainer = document.getElementById('output-container') as HTMLDivElement;
 
 // Annuity interface
 interface Annuity {
@@ -37,8 +35,7 @@ function getValues(): Annuity {
   // Guard for unrealistic inputs
   if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
     const errorMessage = document.createElement('p');
-    errorMessage.textContent = 'Please enter realistic values';
-    outputContainer.appendChild(errorMessage);
+    outputContainer.innerText = 'Please enter realistic values'
     unrealisticNumber = true;
     throw new Error('invalid inputs');
   } else {
