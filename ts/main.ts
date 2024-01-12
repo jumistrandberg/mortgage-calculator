@@ -1,4 +1,4 @@
-// Interfaces
+// Interfaces 
 interface Annuity {
     principal: number;
     annualInterest: number;
@@ -13,13 +13,14 @@ interface Annuity {
   
   // Loan Calculator class
   class LoanCalculator {
+    // Properties for HTML input and output elements 
     private principalInput: HTMLInputElement;
     private interestInput: HTMLInputElement;
     private timeInput: HTMLInputElement;
     private submitBtn: HTMLButtonElement;
     private outputContainer: HTMLDivElement;
   
-    // Get the elements
+    // Get the elements and set up event listeners
     constructor() {
       this.principalInput = document.getElementById("loan") as HTMLInputElement;
       this.interestInput = document.getElementById("interest") as HTMLInputElement;
@@ -37,7 +38,8 @@ interface Annuity {
       this.timeInput.addEventListener('input', this.handleInput.bind(this));
       this.submitBtn.addEventListener('click', this.handleSubmit.bind(this));
     }
-  
+
+    // Remove error message from output container
     private clearErrorMessage() {
       const errorMessage = this.outputContainer.querySelector('p');
       if (errorMessage) {
@@ -45,11 +47,13 @@ interface Annuity {
 
       }
     }
-  
+    
+    // Clear error when new input
     private handleInput() {
       this.clearErrorMessage();
     }
   
+    // Get values from user input and check against conditon for unrealistic values
     private getValues(): Annuity {
       // Store values from input
       const principal = parseFloat(this.principalInput.value);
@@ -58,9 +62,9 @@ interface Annuity {
       const numberOfPayments = timeYears * 12;
   
       // Guard for unrealistic inputs
-      if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
+      if (annualInterest > 30 || timeYears > 100) {
         const errorMessage = document.createElement('p');
-        this.outputContainer.innerText = 'Sluta dröm, välj något rimligt!';
+        this.outputContainer.innerText = 'Sluta dröm! Välj något rimligt!';
 
          // Clear input boxes 
          this.principalInput.value = ''; 
@@ -73,6 +77,7 @@ interface Annuity {
       }
     }
   
+    // Calculate monthly payment with Annuity formula
     private annuityFormula(values: Annuity): number {
       const monthlyInterest = values.annualInterest / 12 / 100;
       const discountFactor =
@@ -82,7 +87,8 @@ interface Annuity {
       const monthlyPayment = values.principal / discountFactor;
       return monthlyPayment;
     }
-  
+
+    // Calculate loan values for every month and store in an array
     private calculateLoanValues(value: Annuity): LoanValues[] {
       const loanValues: LoanValues[] = [];
       const monthlyInterestRate = value.annualInterest / 12 / 100;
@@ -109,7 +115,8 @@ interface Annuity {
   
       return loanValues;
     }
-  
+    
+    // Display result values from loan values in HTML output container
     private displayValues(values: LoanValues[]) {
       this.outputContainer.innerHTML = '';
   
@@ -136,7 +143,8 @@ interface Annuity {
         this.outputContainer.appendChild(outputRow);
       });
     }
-  
+    
+    // Get values when submit button is clicked 
     private handleSubmit() {
       const values = this.getValues();
       const loanValues = this.calculateLoanValues(values);
