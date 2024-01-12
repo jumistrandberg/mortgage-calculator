@@ -106,7 +106,8 @@ class LoanCalculator {
         // Display the overview values separately
         const overviewMonthlyPaymentDiv = document.createElement("div");
         overviewMonthlyPaymentDiv.classList.add("total-row");
-        overviewMonthlyPaymentDiv.textContent = overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)}`;
+        overviewMonthlyPaymentDiv.textContent =
+            overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)}`;
         this.outputContainer.appendChild(overviewMonthlyPaymentDiv);
         const totalInterestDiv = document.createElement("div");
         totalInterestDiv.classList.add("total-row");
@@ -127,6 +128,11 @@ class LoanCalculator {
     handleSubmit() {
         const values = this.getValues();
         const loanValues = this.calculateLoanValues(values);
+        // Clear old input and output
+        this.outputContainer.innerHTML = "";
+        this.principalInput.value = "";
+        this.interestInput.value = "";
+        this.timeInput.value = "";
         this.displayValues(loanValues);
     }
     toggleHideShow() {
