@@ -103,27 +103,31 @@ class LoanCalculator {
             totalInterest += value.interestPaid;
         });
         // Display the overview values separately
+        const overviewContainer = document.createElement("div");
+        overviewContainer.classList.add("overview-container");
         // Show the input values in overview
         const principalInputDiv = document.createElement("div");
         principalInputDiv.textContent = `Lånebelopp: ${inputValues.principal} SEK`;
-        this.outputContainer.appendChild(principalInputDiv);
+        overviewContainer.appendChild(principalInputDiv);
         const interestInputDiv = document.createElement("div");
         interestInputDiv.textContent = `Årsränta: ${inputValues.interest}%`;
-        this.outputContainer.appendChild(interestInputDiv);
+        overviewContainer.appendChild(interestInputDiv);
         const timeInputDiv = document.createElement("div");
         timeInputDiv.textContent = `Avbetalningstid: ${inputValues.time} år`;
-        this.outputContainer.appendChild(timeInputDiv);
+        overviewContainer.appendChild(timeInputDiv);
         // Monthly payment
         const overviewMonthlyPaymentDiv = document.createElement("div");
         overviewMonthlyPaymentDiv.classList.add("total-row");
         overviewMonthlyPaymentDiv.textContent =
             overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)}`;
-        this.outputContainer.appendChild(overviewMonthlyPaymentDiv);
+        overviewContainer.appendChild(overviewMonthlyPaymentDiv);
         // Total interest
         const totalInterestDiv = document.createElement("div");
         totalInterestDiv.classList.add("total-row");
-        totalInterestDiv.textContent = `Total ränta: ${totalInterest.toFixed(0)}`;
-        this.outputContainer.appendChild(totalInterestDiv);
+        totalInterestDiv.textContent = `Total ränta: ${totalInterest.toFixed(0)} SEK`;
+        overviewContainer.appendChild(totalInterestDiv);
+        // Append the overviewContainer to the main outputContainer
+        this.outputContainer.appendChild(overviewContainer);
         // Create button to show monthly values
         const hideShowBtn = document.createElement("button");
         hideShowBtn.classList.add("hide-show-btn");
