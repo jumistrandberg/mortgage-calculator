@@ -1,7 +1,7 @@
 "use strict";
 // Loan Calculator class
 class LoanCalculator {
-    // Get the elements
+    // Get the elements and set up event listeners
     constructor() {
         this.principalInput = document.getElementById("loan");
         this.interestInput = document.getElementById("interest");
@@ -17,15 +17,18 @@ class LoanCalculator {
         this.timeInput.addEventListener('input', this.handleInput.bind(this));
         this.submitBtn.addEventListener('click', this.handleSubmit.bind(this));
     }
+    // Remove error message from output container
     clearErrorMessage() {
         const errorMessage = this.outputContainer.querySelector('p');
         if (errorMessage) {
             this.outputContainer.removeChild(errorMessage);
         }
     }
+    // Clear error when new input
     handleInput() {
         this.clearErrorMessage();
     }
+    // Get values from user input and check against conditon for unrealistic values
     getValues() {
         // Store values from input
         const principal = parseFloat(this.principalInput.value);
@@ -33,9 +36,9 @@ class LoanCalculator {
         const timeYears = parseFloat(this.timeInput.value);
         const numberOfPayments = timeYears * 12;
         // Guard for unrealistic inputs
-        if (principal > 10000000 || annualInterest > 30 || timeYears > 50) {
+        if (annualInterest > 30 || timeYears > 100) {
             const errorMessage = document.createElement('p');
-            this.outputContainer.innerText = 'Sluta dröm, välj något rimligt!';
+            this.outputContainer.innerText = 'Sluta dröm! Välj något rimligt!';
             // Clear input boxes 
             this.principalInput.value = '';
             this.interestInput.value = '';
@@ -46,6 +49,7 @@ class LoanCalculator {
             return { principal, annualInterest, numberOfPayments };
         }
     }
+    // Calculate monthly payment with Annuity formula
     annuityFormula(values) {
         const monthlyInterest = values.annualInterest / 12 / 100;
         const discountFactor = ((1 + monthlyInterest) ** values.numberOfPayments - 1) /
@@ -53,6 +57,7 @@ class LoanCalculator {
         const monthlyPayment = values.principal / discountFactor;
         return monthlyPayment;
     }
+    // Calculate loan values for every month and store in an array
     calculateLoanValues(value) {
         const loanValues = [];
         const monthlyInterestRate = value.annualInterest / 12 / 100;
@@ -75,6 +80,7 @@ class LoanCalculator {
         }
         return loanValues;
     }
+    // Display result values from loan values in HTML output container
     displayValues(values) {
         this.outputContainer.innerHTML = '';
         values.forEach((value, index) => {
@@ -95,6 +101,7 @@ class LoanCalculator {
             this.outputContainer.appendChild(outputRow);
         });
     }
+    // Get values when submit button is clicked 
     handleSubmit() {
         const values = this.getValues();
         const loanValues = this.calculateLoanValues(values);
