@@ -26,6 +26,9 @@ body {
 main {
   border: 2px solid red;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Inputs  */
@@ -76,7 +79,6 @@ input[type="number"] {
   border: 1px solid blue;
   display: flex;
   flex-direction: column;
-  align-items: center;
   line-height: 2rem;
 }
 
@@ -84,5 +86,33 @@ input[type="number"] {
   padding-top: 1rem;
   border-bottom: 1px solid black;
   width: 100%;
-  text-align: center;
+  text-align: left;
+}
+
+#output-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2rem;
+}
+
+.output-row {
+    margin-top: 1rem;
+    border-bottom: 1px solid black;
+}
+
+
+button {
+    text-transform: uppercase;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid lightseagreen;
+    background-color: lightseagreen;
+    color: white;
 }
