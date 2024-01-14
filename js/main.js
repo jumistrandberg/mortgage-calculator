@@ -131,7 +131,7 @@ class LoanCalculator {
         // Create button to show monthly values
         const hideShowBtn = document.createElement("button");
         hideShowBtn.classList.add("hide-show-btn");
-        hideShowBtn.innerText = "Visa månadsuppställning";
+        hideShowBtn.innerText = "Visa/dölj månadsuppställning";
         // Insert the hideShowBtn before the first child of outputContainer
         this.outputContainer.insertBefore(hideShowBtn, this.outputContainer.firstChild);
         // Listen for clicks to show or hide monthly calculations
