@@ -12,6 +12,14 @@
 body {
     overflow-x: hidden;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+}
+
+.intro-section {
+    display: flex;
+    justify-content: center;
+    letter-spacing: 0.2rem;
+    padding: 2rem;
 }
 
 main {
@@ -42,14 +50,26 @@ input[type=number] {
 }
 
 .input-holder {
+    width: 40%;
+    max-width: 400px;
+    border: 1px solid black;
+    border-radius: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 0.5rem;
+
 }
 
 .input-container input {
-    width: 50%;
-    max-width: 400px;
     padding: 0.5rem;
+    border: none;
+}
+
+.input-container input:focus {
+    border: none;
+    outline: none;
 }
 
 .overview-container {
