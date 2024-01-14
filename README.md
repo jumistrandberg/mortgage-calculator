@@ -29,8 +29,10 @@ The toggleHideShow method allows users to hide or show monthly calculation detai
 1. 
 - Open the HTML file in perfered web browser.
 - Alternatively, view the project through GitHub Pages:
+https://jumistrandberg.github.io/mortgage-calculator/
 
 or Netlify: 
+https://jumis-cool-annuity-calculator.netlify.app/
 
 2. Input the loan details (principal amount, annual interest rate, and loan term).
 3. Click the "Submit" button to see the monthly breakdown of the loan.
