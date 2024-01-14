@@ -31,7 +31,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.calculation-section {
+.input-container{
     border: 1px solid greenyellow;
     width: 100%;
     display: flex;
@@ -39,6 +39,11 @@ input[type=number] {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+.input-holder {
+    display: flex;
+    justify-content: center;
 }
 
 .input-container input {
