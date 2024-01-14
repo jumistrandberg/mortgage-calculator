@@ -1,77 +1,88 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Toggle class hidden  */
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }
 
 body {
-    overflow-x: hidden;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-transform: uppercase;
+  overflow-x: hidden;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
 }
 
 .intro-section {
-    display: flex;
-    justify-content: center;
-    letter-spacing: 0.2rem;
-    padding: 2rem;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.2rem;
+  padding: 2rem;
 }
 
 main {
-    border: 2px solid red;
-    width: 100%;
+  border: 2px solid red;
+  width: 100%;
 }
 
 /* Inputs  */
 /* Remove the upp-and-down things in number input  */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
-.input-container{
-    border: 1px solid greenyellow;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+.input-container {
+  border: 1px solid greenyellow;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .input-holder {
-    width: 40%;
-    max-width: 400px;
-    border: 1px solid black;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
-    padding: 0.5rem;
-
+  width: 40%;
+  max-width: 400px;
+  border: 1px solid black;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 0.5rem;
 }
 
 .input-container input {
-    padding: 0.5rem;
-    border: none;
+  padding: 0.5rem;
+  border: none;
 }
 
 .input-container input:focus {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 .overview-container {
-    border: 1px solid blue;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 2rem;
+}
+
+.overview-container > * {
+  padding-top: 1rem;
+  border-bottom: 1px solid black;
+  width: 100%;
+  text-align: center;
 }
