@@ -3,13 +3,50 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Toggle class hidden  */
 .hidden{
     display: none;
 }
 
+body {
+    overflow-x: hidden;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 main {
     border: 2px solid red;
+    width: 100%;
 }
+
+/* Inputs  */
+/* Remove the upp-and-down things in number input  */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.calculation-section {
+    border: 1px solid greenyellow;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.input-container input {
+    width: 50%;
+    max-width: 400px;
+    padding: 0.5rem;
+}
+
 .overview-container {
     border: 1px solid blue;
 }
