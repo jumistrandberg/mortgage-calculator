@@ -119,7 +119,7 @@ class LoanCalculator {
         const overviewMonthlyPaymentDiv = document.createElement("div");
         overviewMonthlyPaymentDiv.classList.add("total-row");
         overviewMonthlyPaymentDiv.textContent =
-            overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)}`;
+            overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[values.length - 1].monthlyPayment.toFixed(0)} SEK`;
         overviewContainer.appendChild(overviewMonthlyPaymentDiv);
         // Total interest
         const totalInterestDiv = document.createElement("div");

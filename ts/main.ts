@@ -185,7 +185,7 @@ class LoanCalculator {
     overviewMonthlyPaymentDiv.textContent =
       overviewMonthlyPaymentDiv.textContent = `Månadskostnad: ${values[
         values.length - 1
-      ].monthlyPayment.toFixed(0)}`;
+      ].monthlyPayment.toFixed(0)} SEK`;
     overviewContainer.appendChild(overviewMonthlyPaymentDiv);
 
     // Total interest
